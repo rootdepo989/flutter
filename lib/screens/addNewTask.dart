@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:todosapp/constants/colors.dart';
 
 class AddNewTaskScreen extends StatelessWidget {
   const AddNewTaskScreen({super.key});
@@ -11,6 +13,7 @@ class AddNewTaskScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: HexColor(bgLight),
         body: buildBody(deviceWidth, deviceHeight, context),
       ),
     );
@@ -42,6 +45,26 @@ class AddNewTaskScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 21),
             ))
           ]),
+        ),
+        const Text("Task title"),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+          child: TextField(
+              decoration:
+                  InputDecoration(filled: true, fillColor: Colors.white)),
+        ),
+        Row(
+          children: [
+            const Text("Category"),
+            GestureDetector(
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    duration: Duration(microseconds: 300),
+                    content: Text("Selected category")));
+              },
+              child: Image.asset("lib/assets/images/weightlifter.png"),
+            )
+          ],
         )
       ],
     );
